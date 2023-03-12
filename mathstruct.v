@@ -94,3 +94,24 @@ Module MonoidDef.
     End MonoidLemmas.
   End Exports.
 End MonoidDef.
+
+(* Now let's try to use the distributive lattice library from mathcomp *)
+From mathcomp Require Import ssreflect.order.
+Import Order.LTheory.
+Parameter grade : distrLatticeType tt.
+
+Locate "==".
+Check grade.
+
+Parameter a b : grade.
+Local Open Scope order_scope.
+Check a `|` b.
+From Hammer Require Import Reflect Hammer.
+
+Check a == a.
+
+Example trivial_prop : a <= a `|` b .
+  hauto lq: on drew: off use: leUl unfold: is_true.
+Qed.
+
+Check meetUl.
